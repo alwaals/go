@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main(){
-i:=[]int{1, 2, 3, 4, 5}
+i:=[]int{1, 2, 3, 4, 5,1}
 fmt.Println(rotate(i,3))
 }
 

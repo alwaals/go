@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	i := []int{1, 8, 9,9,9}
+	i := []int{1, 9, 9,9,9}
 	fmt.Println(addNumber(i))
 }
 func addNumber(inp []int) []int {
