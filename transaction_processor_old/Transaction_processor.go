@@ -56,9 +56,9 @@ func main() {
 		fmt.Println(fmt.Errorf("Got error reading file:%s",errT.Error()))
 		return
 	 }
-	for _,v:=range trans{
-		fmt.Println(fmt.Sprintf("%+v",v))
-	}
+	// for _,v:=range trans{
+	// 	fmt.Println(fmt.Sprintf("%+v",v))
+	// }
 	fmt.Println("Length of the file:",len(trans))
 	fmt.Println("Total time taken:",time.Since(t))
 }
