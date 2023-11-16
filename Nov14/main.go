@@ -36,7 +36,7 @@ func Get(id string) (Entity, error){
 	user:=cache.GetFromCache(id)
 	fmt.Println(user.(Entity))
 	if len(user.(Entity).ID) <=0 {
-		return user.(Entity),fmt.Errorf("Unable to find the record %s",id)
+		return user.(Entity),fmt.Errorf("unable to find the record %s",id)
 	}
 	return user.(Entity),nil
 }
@@ -45,7 +45,7 @@ func (c *Cache) Set(key string, value interface{}) error{
 	if !k{
 	c.keyValue[key] = value.(Entity)
 	}
-	return fmt.Errorf("Unable to set the key as already exists")
+	return fmt.Errorf("unable to set the key as already exists")
 }
 
 func (c *Cache) GetFromCache(key string) interface{} {
