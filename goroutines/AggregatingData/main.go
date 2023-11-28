@@ -40,12 +40,10 @@ func getUser() string{
 func appendString(user string,ch chan string,wg *sync.WaitGroup){
 	time.Sleep(time.Millisecond*100)
 	ch <- fmt.Sprintf("Hi:%s",user)
-	wg.Done()
-	return
+	defer wg.Done()
 }
 func appendInt(user string,ch chan string,wg *sync.WaitGroup){
 	time.Sleep(time.Millisecond*100)
 	ch <- fmt.Sprintf("11:%s",user)
-	wg.Done()
-	return
+	defer wg.Done()
 }

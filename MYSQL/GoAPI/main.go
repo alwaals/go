@@ -73,7 +73,6 @@ func GetBooksHandler(dbConn *sql.DB) func(c *gin.Context) {
 			return
 		}
 		c.IndentedJSON(http.StatusOK, &books)
-		return
 	}
 }
 func AddBooksHandler(dbConn *sql.DB) func(c *gin.Context) {
@@ -93,7 +92,6 @@ func AddBooksHandler(dbConn *sql.DB) func(c *gin.Context) {
 			return
 		}
 		c.IndentedJSON(http.StatusOK, &books)
-		return
 	}
 }
 func dbConn() (*sql.DB, error) {
@@ -109,23 +107,23 @@ func insertRecord(sql *sql.DB,ctx context.Context, book *Books) string {
 	}
 	_, err = res.RowsAffected()
 	if err != nil {
-		return fmt.Sprint("Error returned from RowsEffected %s ", err.Error())
+		return fmt.Sprintf("error returned from RowsEffected %s ", err.Error())
 	}
-	return fmt.Sprintf("Successfully added new record into database")
+	return "successfully added new record into database"
 }
 func fetchRecords(sql *sql.DB,ctx context.Context) ([]Books, string) {
 	var books []Books
 	fmt.Println("Reached fetchRecords with DbConn:", sql.Stats())
 	rows, err := sql.QueryContext(ctx,fmt.Sprintf("Select * from %s",tableName))
 	if err != nil {
-		return books, fmt.Sprintf("Error returned from sql Exec : %s", err.Error())
+		return books, fmt.Sprintf("error returned from sql Exec : %s", err.Error())
 	}
 	defer rows.Close()
 
 	for rows.Next() {
 		var b Books
 		if err := rows.Scan(&b.Pages, &b.Color, &b.Height, &b.Width); err != nil {
-			return books, fmt.Sprintf("Error during rows.Scan:%s", err.Error())
+			return books, fmt.Sprintf("error during rows.Scan:%s", err.Error())
 		}
 		books = append(books, b)
 	}
@@ -135,11 +133,11 @@ func deleteRecord(sql *sql.DB, ctx context.Context,pages int32) string {
 	fmt.Println("Reached deleteRecord handler!")
 	res, err := sql.ExecContext(ctx,fmt.Sprintf("delete from %s where pages = %v", tableName, pages))
 	if err != nil {
-		return fmt.Sprintf("Error returned from sqlExec:%s", err.Error())
+		return fmt.Sprintf("error returned from sqlExec:%s", err.Error())
 	}
 	_, err = res.RowsAffected()
 	if err != nil {
-		return fmt.Sprintf("Error returned from RowsEffected %s:", err.Error())
+		return fmt.Sprintf("error returned from RowsEffected %s:", err.Error())
 	}
 	return "Successfully Deleted the record from database"
 }
